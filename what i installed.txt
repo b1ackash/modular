@@ -1,0 +1,30 @@
+git
+docker
+setup enviroment
+python3 -m venv testenv
+
+
+
+python -m pip install --upgrade pip
+
+
+pip install Flask
+pip install Flask-CORS
+pip install Flask-Session
+pip install sqlmodel
+pip install flask django numpy pandas
+pip install pylint
+pip install black
+pip install pytest
+
+pip install flask_migrate
+pip install flask_minify
+pip install flask_dance
+pip install flask_login
+pip install pip flask_wtf
+
+favicon install from site
+
+sql lite
+
+testuser password1234
