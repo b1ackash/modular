@@ -68,7 +68,28 @@ def get_user_details_by_username():
     else:
         return jsonify({'message': 'Unauthorized'}), 401
 
-# Route to update an existing user
+def get_all_users():
+    if 'username' in session:
+        with SQLSession(engine) as session_db:
+            statement = select(Users)
+            users = session_db.exec(statement).all()
+
+        if users:
+            all_users = []
+            for user in users:
+                user_details = {
+                    'id': user.id,
+                    'username': user.username,
+                    'password': user.password  # Avoid returning passwords in real scenarios
+                }
+                all_users.append(user_details)
+            return jsonify(all_users), 200
+        else:
+            return jsonify({'message': 'No users found'}), 404
+    else:
+        return jsonify({'message': 'Unauthorized'}), 401
+    
+
 def update_user(user_id):
     if 'username' in session:  # Check if session is active
         data = request.json
