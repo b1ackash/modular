@@ -28,18 +28,18 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputUsername">Username</label>
                                                         <input class="form-control" id="exampleInputUsername" readonly 
-                                                               value="{{ current_user.username }}"
+                                                               value="{{ session['username'] }}"
                                                                aria-describedby="userHelp" placeholder="Enter email">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 mb-4">
                                                     <div class="form-group">
-                                                        <label {% if not current_user.email %} class="text-danger" {% endif %} 
+                                                        <label {% if not session['username'] %} class="text-danger" {% endif %} 
                                                                for="exampleInputEmail1">Email address</label>
                                                         <input type="email"
-                                                               {% if current_user.email %} readonly value="{{ current_user.email }}" {% endif %}  
+                                                               {% if session['username'] %} readonly value="{{ session['username'] }}" {% endif %}  
                                                                class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                                        {% if not current_user.email %}       
+                                                        {% if not session['username'] %}       
                                                             <small id="emailHelp" class="form-text text-danger">
                                                                 You don't have an email address associated with this account.
                                                             </small>
@@ -93,10 +93,10 @@
                                                 </div>
                                                 <div class="text-center">
                                                     <h4 class="font-weight-bold h6">
-                                                        {{ current_user.username }}
+                                                        {{ session['username'] }}
                                                     </h4>
                                                     <p class="font-italic text-muted">
-                                                        {% if current_user.email %} {{ current_user.email }} {% endif %}
+                                                        {% if session['username'] %} {{ session['username'] }} {% endif %}
                                                     </p>
                                                 </div>
                                             </div>

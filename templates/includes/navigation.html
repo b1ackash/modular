@@ -6,7 +6,7 @@
             <div class="b-bg">
                 <i class="feather icon-trending-up"></i>
             </div>
-            <span class="b-title">Datta Able</span>
+            <span class="b-title">{{ title }}</span>
         </a>
     </div>
     <a class="mobile-menu" id="mobile-header" href="javascript:">
@@ -113,14 +113,14 @@
                         <div class="pro-head">
                             <img src="{{ config.ASSETS_ROOT }}/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
                             <span>
-                                Username review deleted lines file
+                                {{ session['username'] }} 
                             </span>
                             <a href="/auth-signin.html" class="dud-logout" title="Logout">
                                 <i class="feather icon-log-out"></i>
                             </a>
                         </div>
                         <ul class="pro-body">
-                            <li><a href="/profile.html" class="dropdown-item"><i class="feather icon-user"></i>
+                            <li><a href="/profile" class="dropdown-item"><i class="feather icon-user"></i>
                                 Profile</a></li>
                                 <li><a href="{{ url_for('screens.logout') }}" class="dropdown-item">
                                 <i class="feather icon-lock"></i> Logout</a>
