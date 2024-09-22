@@ -79,8 +79,7 @@ def get_all_users():
             for user in users:
                 user_details = {
                     'id': user.id,
-                    'username': user.username,
-                    'password': user.password  # Avoid returning passwords in real scenarios
+                    'username': user.username
                 }
                 all_users.append(user_details)
             return jsonify(all_users), 200

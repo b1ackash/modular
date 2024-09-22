@@ -29,7 +29,7 @@ def profile():
 
 def viewusers():
     if 'username' in session:
-        return render_template('home/custom_blank.html',title=title)
+        return render_template('home/viewusers.html',title=title)
     else:
         return redirect(url_for('screens.main_page'))
 
