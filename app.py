@@ -3,8 +3,8 @@ from flask import Flask
 from flask_cors import CORS
 from flask_session import Session
 from datetime import timedelta
-from models import engine, SQLModel
-from auth import auth_bp
+from modules.models.models import engine, SQLModel
+from modules.auth import auth_bp
 from api import api_bp
 from screens import screens_bp
 
