@@ -17,7 +17,6 @@ app.config['ASSETS_ROOT'] = ASSETS_ROOT
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 
-
 Session(app)
 CORS(app)
 
