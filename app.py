@@ -5,8 +5,8 @@ from flask_session import Session
 from datetime import timedelta
 from modules.models.models import engine, SQLModel
 from modules.auth import auth_bp
-from api import api_bp
-from screens import screens_bp
+from modules.api import api_bp
+from modules.screens import screens_bp
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SESSION_TYPE'] = 'filesystem'
