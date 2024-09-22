@@ -1,6 +1,6 @@
 # screens.py
 from flask import  render_template, session, redirect, url_for , current_app
-from .config import Config
+from ..config import Config
 
 title =Config.TITLE
 
