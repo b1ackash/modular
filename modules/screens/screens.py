@@ -7,7 +7,7 @@ def main_page():
 
 def landing_page():
     if 'username' in session:
-        return render_template('landing.html')
+        return render_template('home/index.html')
     else:
         return redirect(url_for('screens.main_page'))
 
