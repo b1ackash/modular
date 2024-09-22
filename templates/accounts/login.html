@@ -19,7 +19,7 @@
 
                     <span class="mb-0 text-muted">
                         {% if msg %}
-                            <span class="text-danger">{{ msg | safe }}</span>
+                            <span class="text-danger" id="message" >{{ msg | safe }}</span>
                         {% else %}
                             Add your credentials
                         {% endif %} 
@@ -28,35 +28,57 @@
                     <br />
                     <br />
 
-                    <form role="form" method="post" action="">
+                    <form role="form" method="post" id="loginForm" action="">
 
-                        {{ form.hidden_tag() }}                    
 
                         <div class="input-group mb-3">
-                            {{ form.username(placeholder="Username or eMail", class="form-control") }}
+                            <input type="text" id="username" class="form-control" placeholder="Username" name="username" required><br><br>
                         </div>
                         
                         <div class="input-group mb-4">
-                            {{ form.password(placeholder="Password", class="form-control", type="password") }}
+                             <input type="password" id="password" class="form-control" placeholder="Password"  name="password" required><br><br>
                         </div>
                         
                         <button type="submit" name="login" class="btn btn-primary shadow-2 mb-4">Login</button>
 
                     </form>
 
-                <!--    <p class="mb-0 text-muted">Don’t have an account? <a href="{{ url_for('authentication_blueprint.register') }}" >Sign UP</a></p>-->
+                    <script>
+                        document.getElementById('loginForm').addEventListener('submit', function(event) {
+                            event.preventDefault();
+                
+                            let formData = {
+                                username: document.getElementById('username').value,
+                                password: document.getElementById('password').value
+                            };
+                
+                            fetch('/login', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(formData)
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.json(); // Parse JSON response
+                            })
+                            .then(data => {
+                                console.log('Success:', data);
+                                // Redirect to landing page on successful login
+                                window.location.href = '/landing';
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                // Handle error (e.g., show error message)
+                                document.getElementById('message').innerText = 'Invalid credentials. Please try again.';
+                            });
+                        });
+                    </script>
                     
-                    {% if config.SOCIAL_AUTH_GITHUB %}
-                        <div class="mx-2">
 
-                            <a href="{{url_for('authentication_blueprint.login_github')}}" class="btn">
-                                <i class="feather icon-github auth-icon"></i>
-                                
-                            </a>
-                            <br />
-                            <span class="mx-2">Sign IN with GitHub</span>
-                        </div>
-                    {% endif %}
                 </div>
             </div>
         </div>

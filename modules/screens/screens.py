@@ -3,7 +3,7 @@ from flask import  render_template, session, redirect, url_for
 
 
 def main_page():
-    return render_template('index.html')
+    return render_template('accounts/login.html')
 
 def landing_page():
     if 'username' in session:

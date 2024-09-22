@@ -1,3 +1,4 @@
 line 125 navigation                         <!--  <li><a href="{{ url_for('authentication_blueprint.logout') }}" class="dropdown-item">-->
 line 94 sidebar                  <!--<a href="{{ url_for('authentication_blueprint.logout') }}" class="nav-link">-->					
 line 116 navigation   {{ current_user.username }}  
+
