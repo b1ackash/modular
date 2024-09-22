@@ -43,6 +43,7 @@
                                                                                 -->  
                                                                             </tbody>
                                                                         </table>
+                                                                        <div id="pagination"></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -57,33 +58,69 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    // Make an AJAX request to fetch all users
-    $.ajax({
-        url: '/api/get_all_users', // Assuming this is the route for your API
-        type: 'GET',
-        success: function(data) {
-            let userTableBody = $('#userstdetailstable tbody');
-            userTableBody.empty(); // Clear any existing rows
+    <script>
+        $(document).ready(function() {
+            // Default pagination parameters
+            let currentPage = 1;
+            const limit = 10;
+        
+            // Function to load users based on the current page
+            function loadUsers(page) {
+                $.ajax({
+                    url: `/api/get_all_users_page?page=${page}&limit=${limit}`,
+                    type: 'GET',
+                    success: function(response) {
+                        let userTableBody = $('#userstdetailstable tbody');
+                        userTableBody.empty(); // Clear any existing rows
+        
+                        // Loop through the users and add rows to the table
+                        response.users.forEach(function(user) {
+                            let row = `<tr>
+                                        <td>${user.id}</td>
+                                        <td>${user.username}</td>
+                                        <td><a href="#!" class="label theme-bg text-white f-12">View</a></td>
+                                        <td><a href="#!" class="label theme-bg2 text-white f-12">Delete</a></td>
 
-            // Loop through the users and add rows to the table
-            data.forEach(function(user) {
-                let row = `<tr>
-                            <td>${user.id}</td>
-                            <td>${user.username}</td>
-                            <td></td> <!-- Hide password in real-world apps -->
-                            <td></td> <!-- Hide password in real-world apps -->                            
-                           </tr>`;
-                userTableBody.append(row);
+                                       </tr>`;
+                            userTableBody.append(row);
+                        });
+        
+                        // Update pagination buttons
+                        updatePagination(response.pagination);
+                    },
+                    error: function(err) {
+                        console.log('Error fetching user data:', err);
+                    }
+                });
+            }
+        
+            // Function to update pagination buttons
+            function updatePagination(pagination) {
+                let paginationButtons = $('#pagination');
+                paginationButtons.empty(); // Clear existing buttons
+        
+                // Create previous button
+                if (pagination.page > 1) {
+                    paginationButtons.append(`<button id="pagination-btn" class="btn btn-square btn-primary"  data-page="${pagination.page - 1}">Previous</button>`);
+                }
+        
+                // Create next button
+                if (pagination.page < pagination.total_pages) {
+                    paginationButtons.append(`<button id="pagination-btn"  class="btn btn-square btn-primary" data-page="${pagination.page + 1}">Next</button>`);
+                }
+            }
+        
+            // Load users for the first page
+            loadUsers(currentPage);
+        
+            // Handle pagination button clicks
+            $('#pagination').on('click', '#pagination-btn', function() {
+                let page = $(this).data('page');
+                currentPage = page;
+                loadUsers(currentPage);
             });
-        },
-        error: function(err) {
-            console.log('Error fetching user data:', err);
-        }
-    });
-});
-</script>
+        });
+        </script>
     <!-- [ Main Content ] end -->
 
 {% endblock content %}

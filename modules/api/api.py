@@ -1,6 +1,7 @@
 # api.py
 from flask import  request, jsonify, session
 from sqlmodel import Session as SQLSession, select
+from sqlalchemy import func
 from hashlib import sha256
 from modules.models.models import Users, engine
 
@@ -88,7 +89,48 @@ def get_all_users():
     else:
         return jsonify({'message': 'Unauthorized'}), 401
     
+def get_all_users_page():
+    if 'username' in session:
+        # Get pagination parameters
+        page = request.args.get('page', default=1, type=int)
+        limit = request.args.get('limit', default=10, type=int)
 
+        # Calculate offset (how many rows to skip)
+        offset = (page - 1) * limit
+
+        with SQLSession(engine) as session_db:
+            # Fetch limited users based on pagination
+            statement = select(Users).offset(offset).limit(limit)
+            users = session_db.exec(statement).all()
+
+            # Fetch the total number of users for pagination metadata
+            statementcount = select(Users)
+            results = session_db.exec(statementcount).all()  # Get all records
+            total_users = len(results) #session_db.exec(select(func.count(Users.id))).first()[0]  # Use first() and access the count
+        if users:
+            all_users = []
+            for user in users:
+                user_details = {
+                    'id': user.id,
+                    'username': user.username,
+                    'password': user.password  # Avoid returning passwords in real-world scenarios
+                }
+                all_users.append(user_details)
+            
+            # Pagination metadata
+            pagination_info = {
+                'total': total_users,
+                'page': page,
+                'limit': limit,
+                'total_pages': (total_users + limit - 1) // limit  # Calculate total pages
+            }
+
+            return jsonify({'users': all_users, 'pagination': pagination_info}), 200
+        else:
+            return jsonify({'message': 'No users found'}), 404
+    else:
+        return jsonify({'message': 'Unauthorized'}), 401
+    
 def update_user(user_id):
     if 'username' in session:  # Check if session is active
         data = request.json
