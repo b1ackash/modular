@@ -37,14 +37,14 @@ def viewusers():
 def viewuser(user_id):
     if 'username' in session:
                      
-        return render_template('home/viewuser.html',user=get_user_details(user_id))
+        return render_template('home/viewuser.html',user=get_user_details(user_id),title=title)
     else:
         return redirect(url_for('screens.main_page'))
 
 def deactivateuser(user_id):
     if 'username' in session:
              deactivate_user(user_id)        
-             return render_template('home/viewusers.html')
+             return render_template('home/viewusers.html',title=title)
     else:
         return redirect(url_for('screens.main_page'))
 
