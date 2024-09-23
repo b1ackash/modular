@@ -1,7 +1,7 @@
 # screens.py
 from flask import  render_template, session, redirect, url_for 
 from ..config import Config
-from ..functions.customffunc import get_user_details
+from ..functions.customffunc import get_user_details,deactivate_user
 
 title =Config.TITLE
 
@@ -38,6 +38,13 @@ def viewuser(user_id):
     if 'username' in session:
                      
         return render_template('home/viewuser.html',user=get_user_details(user_id))
+    else:
+        return redirect(url_for('screens.main_page'))
+
+def deactivateuser(user_id):
+    if 'username' in session:
+             deactivate_user(user_id)        
+             return render_template('home/viewusers.html')
     else:
         return redirect(url_for('screens.main_page'))
 

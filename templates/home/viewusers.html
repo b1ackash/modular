@@ -30,7 +30,7 @@
                                                                                     <th>User ID</th>
                                                                                     <th>Username</th>
                                                                                     <th>View</th> 
-                                                                                    <th>Delete</th> 
+                                                                                    <th>Deactivate</th> 
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -79,7 +79,7 @@
                                         <td>${user.id}</td>
                                         <td>${user.username}</td>
                                         <td><a href="/viewuser/${user.id}" class="label theme-bg text-white f-12">View</a></td>
-                                        <td><a href="#!" class="label theme-bg2 text-white f-12">Delete</a></td>
+                                        <td><a href="/deactivateuser/${user.id}" class="label theme-bg2 text-white f-12">Deactivate User</a></td>
 
                                        </tr>`;
                             userTableBody.append(row);
