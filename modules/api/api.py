@@ -1,7 +1,6 @@
 # api.py
 from flask import  request, jsonify, session
 from sqlmodel import Session as SQLSession, select
-from sqlalchemy import func
 from hashlib import sha256
 from modules.models.models import Users, engine
 
