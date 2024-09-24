@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify, session
 from sqlmodel import Session as SQLSession, select
 from hashlib import sha256
 from modules.models.models import Users, engine
-
+import hashlib
 api_bp = Blueprint('api', __name__)
 
 @api_bp.route('/api/user_details', methods=['GET'])

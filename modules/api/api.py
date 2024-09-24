@@ -1,8 +1,9 @@
 # api.py
 from flask import  request, jsonify, session
 from sqlmodel import Session as SQLSession, select
-from hashlib import sha256
+import hashlib
 from modules.models.models import Users, engine
+from hashlib import sha256
 
 
 def get_user_details():
