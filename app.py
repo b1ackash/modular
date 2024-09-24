@@ -19,13 +19,13 @@ app.config['ASSETS_ROOT'] = ASSETS_ROOT
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 # Email configuration
-app.config['MAIL_SERVER'] = 'smtp.your-email-provider.com'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'your-email@example.com'
-app.config['MAIL_PASSWORD'] = 'your-email-password'
-app.config['MAIL_DEFAULT_SENDER'] = 'your-email@example.com'
+app.config['MAIL_USERNAME'] = 'osbornepotani@gmail.com'
+app.config['MAIL_PASSWORD'] = 'pvfq ftpp umyf svrj'
+app.config['MAIL_DEFAULT_SENDER'] = 'osbornepotani@gmail.com'
 
 # Initialize Flask extensions
 Session(app)
@@ -50,7 +50,7 @@ def favicon():
 def send_email():
     try:
         msg = Message('Hello from Flask',
-                      recipients=['recipient@example.com'])
+                      recipients=['osbornepotani@live.com'])
         msg.body = 'This is a test email sent from your Flask app!'
         mail.send(msg)
         return "Email sent!"
