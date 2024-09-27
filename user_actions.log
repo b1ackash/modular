@@ -1,0 +1,27 @@
+2024-09-27 00:03:57,140 - INFO - Logging is configured successfully.
+2024-09-27 00:04:36,917 - INFO - User ID: 6 - Action: Logged in
+2024-09-27 12:16:16,231 - INFO - User ID: 6 - Action: Logged in
+2024-09-27 12:35:32,620 - INFO - User ID: 6 - Action: Logged in
+2024-09-27 12:35:32,673 - INFO - User ID: pot - Action: landing_page opened  by 
+2024-09-27 12:38:05,550 - INFO - User ID: pot - Action:  opened landing_page 
+2024-09-27 12:38:44,207 - INFO - User ID: pot - Action:  opened Main page
+2024-09-27 12:40:41,094 - INFO - User ID: pot - Action:  opened Main page
+2024-09-27 12:40:50,279 - INFO - User ID: pot - Action:  opened Register_page
+2024-09-27 12:41:00,394 - INFO - User ID: pot - Action:  created User   
+2024-09-27 12:41:00,478 - INFO - User ID: pot - Action:  opened View_users_page
+2024-09-27 12:41:00,888 - INFO - User ID: pot - Action: Retrived users 
+2024-09-27 12:41:20,598 - INFO - User ID: pot - Action:  opened Logout  
+2024-09-27 12:41:46,159 - INFO - User ID: 15 - Action: Logged in
+2024-09-27 12:41:46,230 - INFO - User ID: test - Action:  opened landing_page 
+2024-09-27 12:42:29,388 - INFO - User ID: test - Action:  opened landing_page 
+2024-09-27 12:42:31,467 - INFO - User ID: test - Action:  opened landing_page 
+2024-09-27 12:42:32,647 - INFO - User ID: test - Action:  opened landing_page 
+2024-09-27 12:42:33,681 - INFO - User ID: test - Action:  opened landing_page 
+2024-09-27 12:42:42,564 - INFO - User ID: test - Action:  opened Profile_page 
+2024-09-27 12:42:58,032 - INFO - User ID: test - Action:  opened View_users_page
+2024-09-27 12:42:58,383 - INFO - User ID: test - Action: Retrived users 
+2024-09-27 12:43:01,693 - INFO - User ID: test - Action:  opened View_user_page
+2024-09-27 12:43:01,698 - INFO - User ID: test - Action: User Details retrieved 
+2024-09-27 12:43:26,925 - INFO - User ID: test - Action: updated user details 
+2024-09-27 12:43:42,335 - INFO - User ID: test - Action:  opened Main page
+2024-09-27 12:43:46,795 - INFO - User ID: test - Action:   Logouted  

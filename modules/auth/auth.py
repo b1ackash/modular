@@ -1,8 +1,9 @@
-from flask import request, jsonify, session, redirect, url_for
+from flask import request, jsonify, session
 from sqlmodel import select
 from modules.models.models import Users, engine  # Import the Users model and engine
 from sqlmodel import Session as SQLSession  # Import SQLModel's Session
 import hashlib
+from modules.functions.customffunc import log_user_action
 
 # Login route
 def login():
@@ -21,6 +22,7 @@ def login():
         session.permanent = True
         # Set session data upon successful login
         session['username'] = username
+        log_user_action('Logged in', session['username'])
         return jsonify({'message': 'Login successful'}), 200
     else:
         return jsonify({'message': 'Invalid credentials'}), 401

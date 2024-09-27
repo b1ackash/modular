@@ -1,0 +1,24 @@
+-System has the APIS for 
+	-login
+	-logout
+	-retrieve single
+	-retrieve multiple
+	-update 
+	-delete
+	-send email
+
+-System has Screens
+	-Ajax Screens
+	-Jinja Templates screens
+	-Registeration screens
+	-Buttons
+
+- System has Configuration file
+	-allows renaming system to different names easily
+	
+-System  is modular system , functions are separated as modules
+-System uses ORM models
+
+whats left
+- building proper db , to add more field in the user detais datable 
+- add password security control currently allows any password

@@ -2,9 +2,7 @@
 from flask import session,render_template
 from sqlmodel import Session as SQLSession, select,and_
 from modules.models.models import Users, engine
-
-
-
+from flask import current_app
 
 def get_user_details(user_id):
     if 'username' in session:
@@ -14,6 +12,7 @@ def get_user_details(user_id):
             user = session_db.exec(statement).first()
 
         if user:
+            log_user_action('User Details retrieved ', session['username'])
             user_details = {
                 'id': user.id,
                 'username': user.username,
@@ -37,6 +36,15 @@ def deactivate_user(user_id: int):
         if user:
             session_db.delete(user)
             session_db.commit()
+            log_user_action('user Deleted', user.id)
             return f"User with ID {user_id} deleted successfully."
         else:
             return f"User with ID {user_id} does not exist."    
+
+def log_user_action(action, user_id):
+    """Log user actions with user ID."""
+    if current_app:
+        current_app.logger.info(f'User ID: {user_id} - Action: {action}')
+        print(f'Logging: User ID: {user_id} - Action: {action}')  # Debug print
+        for handler in current_app.logger.handlers:
+            handler.flush()  

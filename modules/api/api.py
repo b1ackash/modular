@@ -4,7 +4,8 @@ from sqlmodel import Session as SQLSession, select
 import hashlib
 from modules.models.models import Users, engine
 from hashlib import sha256
-
+from ..email_sender import send_custom_email
+from modules.functions.customffunc import log_user_action
 
 def get_user_details():
     if 'username' in session:
@@ -20,6 +21,7 @@ def get_user_details():
                 'username': user.username,
 				'password': user.password
             }
+            log_user_action(' retrireved User details', session['username'])        
             return jsonify(user_details), 200
         else:
             return jsonify({'message': 'User not found'}), 404
@@ -39,7 +41,7 @@ def create_user():
             session_db.add(new_user)
             session_db.commit()
             session_db.refresh(new_user)
-
+        log_user_action(' created User   ', session['username'])        
         return jsonify({'message': 'User created successfully', 'user_id': new_user.id}), 201
     else:
         return jsonify({'message': 'Unauthorized'}), 401
@@ -63,6 +65,7 @@ def get_user_details_by_username():
                 'username': user.username,
 				'password': user.password
             }
+            log_user_action(' retrireved  User details', session['username'])        
             return jsonify(user_details), 200
         else:
             return jsonify({'message': 'User not found'}), 404
@@ -83,6 +86,7 @@ def get_all_users():
                     'username': user.username
                 }
                 all_users.append(user_details)
+            log_user_action(' retrieved All user details   ', session['username'])        
             return jsonify(all_users), 200
         else:
             return jsonify({'message': 'No users found'}), 404
@@ -124,7 +128,7 @@ def get_all_users_page():
                 'limit': limit,
                 'total_pages': (total_users + limit - 1) // limit  # Calculate total pages
             }
-
+            log_user_action('Retrived users ', session['username'])        
             return jsonify({'users': all_users, 'pagination': pagination_info}), 200
         else:
             return jsonify({'message': 'No users found'}), 404
@@ -152,15 +156,30 @@ def update_user(user_id):
 
             session_db.add(user)
             session_db.commit()
-
+            log_user_action('updated user details ', session['username'])        
         return jsonify({'message': 'User updated successfully'}), 200
     else:
         return jsonify({'message': 'Unauthorized'}), 401  # Return unauthorized if session is not active
-		
+
+def send_email():
+    if 'username' in session:  # Check if session is active
+        # Get data from the POST request
+        log_user_action('sent Email   ', session['username'])        
+        recipient = request.json.get('recipient')
+        subject = request.json.get('subject')
+        body = request.json.get('body')
+
+        # Call the function to send an email
+        result = send_custom_email(recipient, subject, body)
+        return jsonify({'message': result})
+    else:
+        return jsonify({'message': 'Unauthorized'}), 401  # Return unauthorized if session is not active
+
 
 #API to get logout
 def logout_api():
     # Clear session data (logout)
-	session.pop('username', None)
-	return jsonify({'message': 'Aidos'}), 200
+    log_user_action('logged out  ', session['username'])        
+    session.pop('username', None)
+    return jsonify({'message': 'Aidos'}), 200
 	
